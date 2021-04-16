@@ -22,6 +22,13 @@ void ListVaccine::display(int ID)
 	{
 		it = vaccine->begin();
 		it += ID;
+
+		if (ID > it[0].getSoLuongVaccine() - 1)
+		{
+			cout << "Khong hop le" << endl;
+			return;
+		}
+
 		it->display();
 	}
 	else
@@ -33,6 +40,7 @@ void ListVaccine::input()
 {
 	char exit = 'y';
 	Vaccine* temp = new Vaccine();
+	vector<Vaccine>::iterator _vaccine = vaccine->begin();
 	do
 	{
 		cout << "Nhap vaccine? (y/n) ";
@@ -44,6 +52,8 @@ void ListVaccine::input()
 
 		vaccine->push_back(*temp->input());
 	} while (true);
+
+	delete temp;
 }
 
 void ListVaccine::displayNameOfVaccine()
@@ -55,6 +65,8 @@ void ListVaccine::displayNameOfVaccine()
 	}
 
 	vector<Vaccine>::iterator it; int i = 0;
+
+	cout << "So loai vaccine co trong kho: " << it[0].getSoLuongVaccine() << endl;
 
 	for (it = vaccine->begin(); it != vaccine->end(); it++)
 	{
@@ -78,7 +90,7 @@ void ListVaccine::sell()
 
 	vector<Vaccine>::iterator _vaccine = vaccine->begin();
 
-	if (iChoice > _vaccine[0].getSoLuong() - 1)
+	if (iChoice > _vaccine[0].getSoLuongVaccine() - 1)
 	{
 		cout << "Khong hop le" << endl;
 		return;
@@ -118,6 +130,13 @@ void ListVaccine::buy()
 	cout << "Nhap ID mua them (-1 de mua moi): ";
 	cin >> iChoice;
 
+	if (iChoice == -1)
+	{
+		cout << "Nhap them vaccine: " << endl;
+		this->input();
+		return;
+	}
+
 	vector<Vaccine>::iterator _vaccine = vaccine->begin();
 
 	if (iChoice > _vaccine[0].getSoLuong() - 1)
@@ -126,27 +145,19 @@ void ListVaccine::buy()
 		return;
 	}
 
-	if (iChoice == -1)
-	{
-		cout << "Nhap them vaccine: " << endl;
-		this->input();
-	}
-	else
-	{
-		_vaccine += iChoice;
-		int soLuong;
-		cout << "Nhap so luong mua: ";
-		cin >> soLuong;
+	_vaccine += iChoice;
+	int soLuong;
+	cout << "Nhap so luong mua: ";
+	cin >> soLuong;
 
-		if (soLuong <= 0)
-		{
-			cout << "Khong hop le" << endl;
-			return;
-		}
-
-		_vaccine->setSoLuong(_vaccine->getSoLuong() + soLuong);
-		cout << "Thanh tien: " << _vaccine->getGia() * soLuong << endl;
+	if (soLuong <= 0)
+	{
+		cout << "Khong hop le" << endl;
+		return;
 	}
+
+	_vaccine->setSoLuong(_vaccine->getSoLuong() + soLuong);
+	cout << "Thanh tien: " << _vaccine->getGia() * soLuong << endl;
 }
 
 bool ListVaccine::isEmpty()
@@ -173,13 +184,11 @@ void ListVaccine::delVac()
 
 	vector<Vaccine>::iterator _vaccine = vaccine->begin();
 
-	if (iChoice > _vaccine[0].getSoLuong() - 1)
+	if (iChoice > _vaccine[0].getSoLuongVaccine() - 1)
 	{
 		cout << "Khong hop le" << endl;
 		return;
 	}
-
-	_vaccine[0].setSoLuongVaccine(_vaccine[0].getSoLuongVaccine() - 1);
 
 	this->vaccine->erase(this->vaccine->begin() + iChoice);
 }

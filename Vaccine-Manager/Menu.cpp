@@ -49,7 +49,7 @@ void Menu::menu()
 			}
 			int ID;
 			this->vaccine->displayNameOfVaccine();
-			cout << "Nhap ID vaccine can xem: ";
+			cout << "Nhap ID vaccine can xem (-1 de xem tat ca): ";
 			cin >> ID;
 			this->vaccine->display(ID);
 		}

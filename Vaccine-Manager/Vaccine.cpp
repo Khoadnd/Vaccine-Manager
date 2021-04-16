@@ -110,9 +110,7 @@ Vaccine* Vaccine::input()
 	this->dttDoiTuong->input();
 
 	delete[] initTenVaccine, initTenNhaSanXuat, initTenNhaPhanPhoi;
-
-	Vaccine* temp = new Vaccine(*this);
-	return temp;
+	return this;
 }
 
 void Vaccine::display()
