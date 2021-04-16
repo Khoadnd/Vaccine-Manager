@@ -70,6 +70,8 @@ Vaccine* Vaccine::input()
 		* initTenNhaSanXuat = new char[100],
 		* initTenNhaPhanPhoi = new char[100];
 
+	unsigned int initGia, initSoLuong;
+
 	do
 	{
 		cout << "Nhap ten vaccine: ";
@@ -91,15 +93,21 @@ Vaccine* Vaccine::input()
 	cout << "Nhap ngay san xuat: " << endl;
 	this->dNgaySanXuat->input();
 
+	do
+	{
+		cout << "Nhap gia cua vaccine: ";
+		cin >> initGia;
+	} while (!this->setGia(initGia));
+
+	do
+	{
+		cout << "Nhap so luong trong kho: ";
+		cin >> initSoLuong;
+	} while (!this->setSoLuong(initSoLuong));
+
 	cout << "Nhap doi tuong tiem vaccine: " << endl;
 	cin.ignore();
 	this->dttDoiTuong->input();
-
-	cout << "Nhap gia cua vaccine: ";
-	cin >> this->uiGia;
-
-	cout << "Nhap so luong trong kho: ";
-	cin >> this->uiSoLuong;
 
 	delete[] initTenVaccine, initTenNhaSanXuat, initTenNhaPhanPhoi;
 
@@ -109,7 +117,7 @@ Vaccine* Vaccine::input()
 
 void Vaccine::display()
 {
-	cout << "-------------------";
+	cout << "-------------------" << endl;
 	cout << "Ten vaccine: ";
 	puts(this->cTenVaccine);
 
@@ -213,14 +221,22 @@ void Vaccine::setDoiTuongTiem(DoiTuongTiem* initDoiTuongTiem)
 	this->dttDoiTuong = new DoiTuongTiem(*initDoiTuongTiem);
 }
 
-void Vaccine::setGia(unsigned int initGia)
+int Vaccine::setGia(unsigned int initGia)
 {
+	if (initGia == UINT32_MAX)
+		return 0;
+
 	this->uiGia = initGia;
+	return 1;
 }
 
-void Vaccine::setSoLuong(unsigned int initSoLuong)
+int Vaccine::setSoLuong(unsigned int initSoLuong)
 {
+	if (initSoLuong == UINT32_MAX)
+		return 0;
+
 	this->uiSoLuong = initSoLuong;
+	return 1;
 }
 
 bool Vaccine::isStringEmpty(char* s)
@@ -229,4 +245,9 @@ bool Vaccine::isStringEmpty(char* s)
 		return 1;
 
 	return 0;
+}
+
+void Vaccine::setSoLuongVaccine(unsigned int soLuong)
+{
+	this->uiSoLuongVaccine = soLuong;
 }

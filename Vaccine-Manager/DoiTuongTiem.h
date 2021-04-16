@@ -27,7 +27,7 @@ public:
 
 	int setGioiTinh(char*);
 	int setNhomMau(char*);
-	void setDoTuoi(unsigned int);
+	int setDoTuoi(unsigned int);
 
 	bool isNhomMau(char* = {});
 	bool isGioiTinh(char* = {});

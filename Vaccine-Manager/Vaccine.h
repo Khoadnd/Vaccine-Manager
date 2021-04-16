@@ -32,14 +32,15 @@ public:
 	unsigned int getSoLuong();
 
 	unsigned int getSoLuongVaccine();
+	void setSoLuongVaccine(unsigned int);
 
 	int setTenVaccine(char*);
 	int setTenNhaSanXuat(char*);
 	int setTenNhaPhanPhoi(char*);
 	void setNgaySanXuat(Date*);
 	void setDoiTuongTiem(DoiTuongTiem*);
-	void setGia(unsigned int);
-	void setSoLuong(unsigned int);
+	int setGia(unsigned int);
+	int setSoLuong(unsigned int);
 
 	bool isStringEmpty(char*);
 

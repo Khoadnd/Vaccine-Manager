@@ -10,10 +10,16 @@ public:
 	ListVaccine();
 	~ListVaccine();
 
-	void display();
+	void display(int = -1);
+	void displayNameOfVaccine();
+
 	void input();
 
 	void sell();
 	void buy();
+
+	void delVac();
+
+	bool isEmpty();
 };
 

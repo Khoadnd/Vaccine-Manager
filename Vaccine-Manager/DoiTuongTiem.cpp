@@ -42,22 +42,25 @@ void DoiTuongTiem::input()
 	char* initNhomMau = new char[5],
 		* initGioiTinh = new char[5];
 
-	unsigned int initdoTuoi = 0;
+	unsigned int initDoTuoi = 0;
 
 	do
 	{
 		cout << "Nhap nhom mau: ";
 		cin.getline(initNhomMau, 5);
-	} while (!setNhomMau(initNhomMau));
+	} while (!this->setNhomMau(initNhomMau));
 
 	do
 	{
 		cout << "Nhap gioi tinh: ";
 		cin.getline(initGioiTinh, 5);
-	} while (!setGioiTinh(initGioiTinh));
+	} while (!this->setGioiTinh(initGioiTinh));
 
-	cout << "Nhap do tuoi: ";
-	cin >> this->doTuoi;
+	do
+	{
+		cout << "Nhap do tuoi: ";
+		cin >> initDoTuoi;
+	} while (!this->setDoTuoi(initDoTuoi));
 
 	delete[] initNhomMau, initGioiTinh;
 }
@@ -110,9 +113,13 @@ int DoiTuongTiem::setNhomMau(char* initNhomMau)
 	return 0;
 }
 
-void DoiTuongTiem::setDoTuoi(unsigned int initTuoi)
+int DoiTuongTiem::setDoTuoi(unsigned int initTuoi)
 {
+	if (initTuoi > 200)
+		return 0;
+
 	this->doTuoi = initTuoi;
+	return 1;
 }
 
 bool DoiTuongTiem::isNhomMau(char* nhomMau)
